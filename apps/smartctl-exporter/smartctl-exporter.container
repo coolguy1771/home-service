@@ -1,0 +1,19 @@
+[Unit]
+Description=smartctl-exporter
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+ContainerName=smartctl-exporter
+Image=quay.io/prometheuscommunity/smartctl-exporter:v0.12.0
+Network=host
+
+# Volume mount for accessing host's /dev directory in read-only mode
+Volume=/dev:/hostdev:ro
+
+[Service]
+Restart=always
+TimeoutStartSec=900
+
+[Install]
+WantedBy=multi-user.target
