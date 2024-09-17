@@ -9,7 +9,7 @@ ContainerName=dhcp-relay
 Environment=TZ=America/New_York
 Exec=--log-dhcp --log-queries --no-daemon \
   --port=0 \
-  --dhcp-range=192.168.1.1,proxy,255.255.255.0 \
+  --dhcp-range=10.10.10.1,proxy,255.255.255.0 \
   --enable-tftp \
   --tftp-root=/var/lib/tftpboot \
   --pxe-service=net:#ipxe,x86PC,,undionly.kpxe \
@@ -25,7 +25,7 @@ Exec=--log-dhcp --log-queries --no-daemon \
   --dhcp-match=set:arm64,option:client-arch,11 \
   --dhcp-boot=tag:arm64,ipxe-arm64.efi \
   --dhcp-userclass=set:ipxe,iPXE \
-  --dhcp-boot=tag:ipxe,http://192.168.1.128/boot.ipxe
+  --dhcp-boot=tag:ipxe,http://10.10.10.228/boot.ipxe
 Image=quay.io/poseidon/dnsmasq:v0.5.0-31-gdc1adc8@sha256:6a839fde323fb405f6be84003a6b9019d9151caa983bfdcbc8cc1b51b1f8627d
 Network=host
 
