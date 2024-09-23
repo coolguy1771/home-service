@@ -25,8 +25,8 @@ Exec=--log-dhcp --log-queries --no-daemon \
   --dhcp-match=set:arm64,option:client-arch,11 \
   --dhcp-boot=tag:arm64,ipxe-arm64.efi \
   --dhcp-userclass=set:ipxe,iPXE \
-  --dhcp-boot=tag:ipxe,http://10.10.10.228/boot.ipxe
-Image=quay.io/poseidon/dnsmasq:v0.5.0-31-gdc1adc8@sha256:6a839fde323fb405f6be84003a6b9019d9151caa983bfdcbc8cc1b51b1f8627d
+  --dhcp-boot=tag:ipxe,https://pxe.factory.talos.dev/pxe/895b3dbc9b1f5e556da073a96c632658576368f23a642b3f46372225c701d204/v1.7.6/metal-amd64
+Image=ghcr.io/coolguy1771/dhcp-relay-master:rolling@sha256:3783b9e00030b691407be4317acf958fc562be06ef0388f83148826aa4115306
 Network=host
 
 [Service]
