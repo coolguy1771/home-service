@@ -26,7 +26,7 @@ Exec=--log-dhcp --log-queries --no-daemon \
   --dhcp-boot=tag:arm64,ipxe-arm64.efi \
   --dhcp-userclass=set:ipxe,iPXE \
   --dhcp-boot=tag:ipxe,https://pxe.factory.talos.dev/pxe/c3bec66d27584f925e5b1df3036999b37333808d3e47c22f52dace0e14267bcf/v1.8.0/metal-amd64
-Image=ghcr.io/coolguy1771/dhcp-relay-master:rolling@sha256:1a9aea0e5d63b12a9b93632a7a461441b2023e5a280deaf9066077a8a60b1177
+Image=ghcr.io/coolguy1771/dhcp-relay-master:rolling@sha256:1eb03a404af2cc70fb546ddd8084cb631469c3290b1ad9035ab89347e8abc371
 Network=host
 
 [Service]
