@@ -24,7 +24,7 @@ My home service stack running on a [Beelink EQ12](https://www.bee-link.com/eq12-
 2. Make a new [SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent), add it to GitHub and clone your repo
 
     ```sh
-    export GITHUB_USER="onedr0p"
+    export GITHUB_USER="coolguy1771"
     curl https://github.com/$GITHUB_USER.keys > ~/.ssh/authorized_keys
     sudo install -d -o $(logname) -g $(logname) -m 755 /var/opt/home-service
     git clone git@github.com:$GITHUB_USER/home-service.git /var/opt/home-service/.
@@ -55,50 +55,11 @@ My home service stack running on a [Beelink EQ12](https://www.bee-link.com/eq12-
     sudo podman network create \
         --driver=ipvlan \
         --ipam-driver=host-local \
-        --subnet=192.168.1.0/24 \
-        --gateway=192.168.1.1 \
-        --ip-range=192.168.1.121-192.168.1.149 \
+        --subnet=10.10.10.0/24
+        --gateway=100.10.10.1 \
+        --interface-name=bond0 \
+        --ip-range=10.10.10.201-10.10.10.254 \
         containernet
-    ```
-
-2. Setup the currently used interface with `systemd-networkd`
-
-    📍 _Setting the DNS server to a container used on this system might make dragons appear 🐉._
-
-    ```sh
-    sudo bash -c 'cat << EOF > /etc/systemd/network/enp1s0.network
-    [Match]
-    Name = enp1s0
-    [Network]
-    DHCP = yes
-    DNS = 1.1.1.1
-    DNS = 1.0.0.1
-    IPVLAN = containernet
-    [DHCPv4]
-    UseDNS = false'
-    ```
-
-3. Setup `containernet` with `systemd-networkd`
-
-    ```sh
-    sudo bash -c 'cat << EOF > /etc/systemd/network/containernet.netdev
-    [NetDev]
-    Name = containernet
-    Kind = ipvlan'
-    sudo bash -c 'cat << EOF > /etc/systemd/network/containernet.network
-    [Match]
-    Name = containernet
-    [Network]
-    IPForward = yes
-    Address = 192.168.1.120/24'
-    ```
-
-4. Disable `networkmanager`, the enable and start `systemd-networkd`
-
-    ```sh
-    sudo systemctl disable --now NetworkManager
-    sudo systemctl enable systemd-networkd
-    sudo systemctl start systemd-networkd
     ```
 
 ### Container configuration
@@ -155,9 +116,9 @@ sudo systemctl disable --now firewalld.service
 | Name | Subnet | DHCP range | ARP reserved |
 |------|--------|------------|--------------|
 | LAN | 192.168.1.0/24 | 150-254 | 120-149 |
-| TRUSTED | 192.168.10.0/24 | 150-254 | - |
-| SERVERS | 192.168.42.0/24 | 150-254 | 120-149 |
-| GUESTS | 192.168.50.0/24 | 150-254 | - |
+| MGMT | 192.168.10.0/24 | 150-254 | - |
+| LAB | 192.168.42.0/24 | 150-254 | 120-149 |
+| GUEST | 192.168.50.0/24 | 150-254 | - |
 | IOT | 192.168.70.0/24 | 150-254 | - |
 | WIREGUARD | 192.168.80.0/28 | - | - |
 
