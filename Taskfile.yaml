@@ -7,7 +7,7 @@ env:
 
 vars:
   # renovate: datasource=github-releases depName=getsops/sops
-  SOPS_VERSION: v3.9.3
+  SOPS_VERSION: v3.9.4
 
 includes:
   app: ./apps
