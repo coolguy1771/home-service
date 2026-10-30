@@ -26,7 +26,7 @@ Exec=--log-dhcp --log-queries --no-daemon \
   --dhcp-boot=tag:arm64,ipxe-arm64.efi \
   --dhcp-userclass=set:ipxe,iPXE \
   --dhcp-boot=tag:ipxe,http://10.10.10.75/boot.ipxe
-Image=ghcr.io/coolguy1771/dhcp-relay-master:rolling@sha256:43c2fddf2f9639a0686ea3aca5478b2fd8ffa4d94cc4dc9d3170579fb1f28bda
+Image=ghcr.io/coolguy1771/dhcp-relay-master:rolling@sha256:9ff90d3ff860321306fa6d1254b5367824443aa514f18c1b91e9dcf1967f30aa
 Network=host
 
 [Service]
